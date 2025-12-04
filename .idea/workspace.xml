@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e46c049-2bf0-41df-89f7-ec741e1a3ef3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/shuidanRPA-bullet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/element_1_screenshotsaika.png" beforeDir="false" afterPath="$PROJECT_DIR$/element_1_screenshotsaika.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/element_2_screenshotsaika.png" beforeDir="false" afterPath="$PROJECT_DIR$/element_2_screenshotsaika.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/element_3_screenshotsaika.png" beforeDir="false" afterPath="$PROJECT_DIR$/element_3_screenshotsaika.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/element_4_screenshotsaika.png" beforeDir="false" afterPath="$PROJECT_DIR$/element_4_screenshotsaika.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/full_page_screenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/full_page_screenshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shuidanRPA.py" beforeDir="false" afterPath="$PROJECT_DIR$/shuidanRPA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/签收后无轨迹/tracking_element_2_marked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/签收后有新轨迹/tracking_element_2_marked.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +59,29 @@
       <recent name="D:\无色界\silver-bullet" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.shuidanRPA">
+    <configuration name="shuidanRPA-bullet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="silver-bullet" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/shuidanRPA-bullet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="shuidanRPA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="silver-bullet" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -84,6 +107,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.shuidanRPA" />
+        <item itemvalue="Python.shuidanRPA-bullet" />
       </list>
     </recent_temporary>
   </component>
@@ -96,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1764782034641</updated>
       <workItem from="1764782035777" duration="2331000" />
-      <workItem from="1764811869059" duration="23463000" />
+      <workItem from="1764811869059" duration="27990000" />
     </task>
     <servers />
   </component>
@@ -131,13 +155,14 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/shuidanRPA.py</url>
-          <line>422</line>
+          <line>421</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/silver_bullet$shuidanRPA.coverage" NAME="shuidanRPA Coverage Results" MODIFIED="1764837458034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/silver_bullet$shuidanRPA.coverage" NAME="shuidanRPA Coverage Results" MODIFIED="1764843134418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/silver_bullet$shuidanRPA_bullet.coverage" NAME="shuidanRPA-bullet Coverage Results" MODIFIED="1764843103560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
