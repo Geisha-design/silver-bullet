@@ -21,6 +21,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+# 排除所有签收数据目录
+data/签收*/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -140,3 +142,9 @@ completed_manifests/
 *.csv
 logs/
 *.log
+
+# Exclude tracking folders
+data/签收后有新轨迹/
+data/与签收时间一致/
+data/签收后无轨迹/
+data/签收*/

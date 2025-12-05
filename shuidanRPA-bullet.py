@@ -63,7 +63,7 @@ def is_matching_tracking(text):
 def trNum(ele):
     tbody_element = ele
     tr_count = len(tbody_element.eles('tag:p'))  # 使用标签选择器
-    print(f"p元素数量: {tr_count}")
+    # logger.info(f"p元素数量: {tr_count}")
     return tr_count
 
 def add_red_border_and_text(image_path, output_path, text="签收轨迹"):
@@ -121,17 +121,22 @@ def add_red_border_to_element(image_path, output_path, corners, text="签收轨�
     left_top = corners[0]
     right_bottom = corners[2]
 
-    # print(left_top[0]+100)
-    cv = left_top[0]-50
-    cv2 =  left_top[1]+100
+    # logger.info(left_top[0]+100)
+    # cv = left_top[0]-50
+    # cv2 =  left_top[1]+100
     # 绘制红色边框（边框宽度为5像素）
     border_width = 4
     # draw.rectangle([left_top[0]-50, left_top[1]+100, right_bottom[0]+200, right_bottom[1]+200],
     #                outline="red", width=border_width)
+    #
+    # draw.rectangle([left_top[0]-50, left_top[1]+100, right_bottom[0]+200, right_bottom[1]+200],
+    #                outline="red", width=border_width)
 
-    draw.rectangle([left_top[0]-50, left_top[1]+100, right_bottom[0]+200, right_bottom[1]+200],
+
+    draw.rectangle([left_top[0]+200, left_top[1]+600, right_bottom[0]+550, right_bottom[1]+700],
                    outline="red", width=border_width)
-    
+
+
     # 设置字体和大小（根据系统调整字体路径）
     try:
         font = ImageFont.truetype("simhei.ttf", 36)  # 尝试使用黑体字体
@@ -164,12 +169,12 @@ def find_earliest_matching_tracking(page, finallyelement):
         element = page.ele(f'xpath://*[@id="content-"]/ul/li[{i}]/p')
         text = element.text
         # 暂时注释掉
-        # print(f"轨迹文本: {text}")
+        # logger.info(f"轨迹文本: {text}")
         
         # 检查文本是否匹配预定义的轨迹
         if is_matching_tracking(text):
             time_zone = page.ele(f'xpath://*[@id="content-"]/ul/li[{i}]').attr("data-date")
-            print(f"时间: {time_zone}")
+            # logger.info(f"时间: {time_zone}")
             matching_items.append({
                 'index': i,
                 'element': element,
@@ -233,20 +238,21 @@ def classify_and_save_image_by_time_relation(page, finallyelement, earliest_matc
     # 检查是否存在签收时间之后的轨迹（在签收元素之后的元素中）
     for i in range(sign_index+1, trNum(finallyelement)+1):
         time_zone = page.ele(f'xpath://*[@id="content-"]/ul/li[{i}]').attr("data-date")
-        print(time_zone)
-        print(sign_time)
+        # logger.info(time_zone)
+        # logger.info(sign_time)
         if time_zone and time_zone < sign_time:
             has_ealer_track = True
             break
 
     if sign_index == 1:
         has_ealer_track = False
-        print("没有其他轨迹")
+        logger.info("没有其他轨迹")
     else:
-        print(f"有其他轨迹，关系为：{has_later_track}, {has_same_time_track}, {has_ealer_track}")
+        logger.info(f"有其他轨迹，关系为：{has_later_track}, {has_same_time_track}, {has_ealer_track}")
 
     
-    # 创建对应的文件夹
+    # 创建对应的文件夹在data目录下
+    folder_name = ""
     if has_ealer_track and not has_same_time_track:
         folder_name = "签收后有新轨迹"
     elif has_same_time_track:
@@ -254,8 +260,9 @@ def classify_and_save_image_by_time_relation(page, finallyelement, earliest_matc
     else:
         folder_name = "签收后无轨迹"
     
-    # 确保文件夹存在
-    os.makedirs(folder_name, exist_ok=True)
+    # 确保data目录下的文件夹存在
+    data_folder_path = os.path.join("data", folder_name)
+    os.makedirs(data_folder_path, exist_ok=True)
     
     # 确定文件名
     if package_number:
@@ -263,12 +270,12 @@ def classify_and_save_image_by_time_relation(page, finallyelement, earliest_matc
     else:
         filename = os.path.basename(marked_image_path)
         
-    # 移动标记图片到对应文件夹
+    # 移动标记图片到data目录下的对应文件夹
     import shutil
-    destination_path = os.path.join(folder_name, filename)
+    destination_path = os.path.join(data_folder_path, filename)
     shutil.move(marked_image_path, destination_path)
     
-    print(f"图片已分类保存至: {destination_path}")
+    logger.info(f"图片已分类保存至: {destination_path}")
 
 
 def log_error_package(package_number):
@@ -281,9 +288,9 @@ def log_error_package(package_number):
     try:
         with open("errorNumber.txt", "a", encoding="utf-8") as f:
             f.write(f"{package_number}\n")
-        print(f"已将包裹号 {package_number} 记录到 errorNumber.txt")
+        logger.info(f"已将包裹号 {package_number} 记录到 errorNumber.txt")
     except Exception as e:
-        print(f"记录错误包裹号时出错: {e}")
+        logger.info(f"记录错误包裹号时出错: {e}")
 
 
 def main(key, package_number=None):
@@ -316,7 +323,7 @@ def main(key, package_number=None):
 
             # 使用corners获取元素的四个角坐标
             corners = element.rect.corners
-            print(f"元素坐标: {corners}")
+            logger.info(f"元素坐标: {corners}")
             
             # 在完整页面截图上对目标元素添加红色边框和文字标注
             if package_number:
@@ -325,14 +332,14 @@ def main(key, package_number=None):
                 output_path = f"tracking_element_{index}_marked.png"
                 
             add_red_border_to_element(screenshot_path, output_path, corners, "签收轨迹")
-            print(f"已保存标记截图: {output_path}")
+            logger.info(f"已保存标记截图: {output_path}")
             
             # 根据时间关系对图片进行分类存储
             classify_and_save_image_by_time_relation(page, finallyelement, earliest_match, output_path, package_number)
         else:
-            print("未找到匹配的轨迹")
+            logger.info("未找到匹配的轨迹")
     except Exception as e:
-        print(f"处理运单 {key} 时发生错误: {e}")
+        logger.info(f"处理运单 {key} 时发生错误: {e}")
         if package_number:
             log_error_package(package_number)
         raise  # 重新抛出异常以便上层处理
@@ -424,17 +431,17 @@ if __name__ == '__main__':
     # }))
     #
 
-    earliest_item = min(matching_items, key=lambda x: x['time'] if x['time'] else "")
-    print(earliest_item)
+    # earliest_item = min(matching_items, key=lambda x: x['time'] if x['time'] else "")
+    # logger.info(earliest_item)
     # main('RL100419617BQ', 'BG-25061552FTMA8FJW')
 
 
 
-    # waybill_data = extract_waybill_numbers("./需要截图的包裹【已签收，但无签收轨迹，最新节点非闭环节点丢件罚单】.xlsx")
-    # for item in waybill_data:
-    #     waybill_number = item['waybill_number']
-    #     package_number = item['package_number']
-    #     main(waybill_number, package_number)
+    waybill_data = extract_waybill_numbers("./副本需要截图的包裹【已签收，但无签收轨迹，最新节点非闭环节点丢件罚单】.xlsx")
+    for item in waybill_data:
+        waybill_number = item['waybill_number']
+        package_number = item['package_number']
+        main(waybill_number, package_number)
     #     # time.sleep(1)
 
 
